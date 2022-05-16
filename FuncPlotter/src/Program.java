@@ -22,10 +22,10 @@ public class Program {
         MyFunction fLog = (x) -> {return 20 * (int) Math.log(x);};
         MyFunction fCubic = (x) -> {return (x*x*x)/200000;};
         for (int i = -360; i < 360; i++) {
-            //canvas.plot(i, fSine.calcY(i));
-            //canvas.plot(i, fQuadratic.calcY(i));
-            //canvas.plot(i, fLog.calcY(i));
-            //canvas.plot(i, fCubic.calcY(i));
+            canvas.plot(i, fSine.calcY(i));
+            canvas.plot(i, fQuadratic.calcY(i));
+            canvas.plot(i, fLog.calcY(i));
+            canvas.plot(i, fCubic.calcY(i));
         }
 
         // Pause and close the canvas then terminate the program.
