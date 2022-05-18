@@ -13,6 +13,8 @@ public class Program {
         // open it on the screen. Use canvas.plot(pX, pY) to plot a point at the (pX, pY) coords
         canvas = new Canvas();
         Scanner input = new Scanner(System.in);
+        System.out.print("function?> ");
+        String j = input.nextLine();
         canvas.setRange(-360, -240, 360, 240);
         canvas.open();
 
@@ -34,6 +36,28 @@ public class Program {
        // plotFunctions(fCubic);
         
         
+        /*
+        MyFunction [] functions = {sin, Quadratic, Log, Cubic};
+        
+        plotFunctions(functions);
+        */
+        // Pause and close the canvas then terminate the program.
+        canvas.pause();
+        canvas.close();
+    }
+    
+    public static void plotFunctions(MyFunction ... y)
+    {
+    	for(int i = 0; i < y.length; i++) {
+    		for(int x = -360; x < 360; x++) {
+        		canvas.plot(x, y[i].calcY(x));
+        	}
+    	}
+    }
+    
+    public static void figureOut(String x)
+    {
+
         MyFunction sin = new MyFunction () 
         {
         	public int calcY(int x) 
@@ -49,7 +73,7 @@ public class Program {
         MyFunction Quadratic = new MyFunction () 
         {
         	public int calcY(int x) {
-        		 return ((x-200)*(x+200))/250;;
+        		 return ((x-200)*(x+200))/250;
         	}
         		public Color getColor()
         		{
@@ -79,21 +103,31 @@ public class Program {
         		}
         };
         
-        MyFunction [] functions = {sin, Quadratic, Log, Cubic};
-        
-        plotFunctions(functions);
-        
-        // Pause and close the canvas then terminate the program.
-        canvas.pause();
-        canvas.close();
-    }
-    
-    public static void plotFunctions(MyFunction ... y)
-    {
-    	for(int i = 0; i < y.length; i++) {
-    		for(int x = -360; x < 360; x++) {
-        		canvas.plot(x, y[i].calcY(x));
+        MyFunction stepFun = new MyFunction() {
+        	public int calcY(int x)
+        	{
+        		return (x<- 100) ? (-100) : (x > 100 ? (100) : (x));
         	}
+        	public Color getColor()
+        	{
+        		return Color.magenta;
+        	}
+        };
+        
+    	switch(x.toUpperCase())
+    	{
+    		case "S":
+    			plotFunctions(sin);
+    		case "Q":
+    			plotFunctions(Quadratic);
+    		case "L":
+    			plotFunctions(Log);
+    		case "C":
+    			plotFunctions(Cubic);
+    		case "T":
+    			plotFunctions(stepFun);
+    		case "":
+    			break;
     	}
     }
 }
